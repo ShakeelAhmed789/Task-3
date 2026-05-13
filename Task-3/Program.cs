@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Task_3
@@ -21,45 +21,60 @@ namespace Task_3
                                   "3. Remove Task\n" +
                                   "4. Exit\n");
 
-                while ( (!int.TryParse(Console.ReadLine(), out menuChoice)) || (menuChoice < 1 || menuChoice > 4))
-                { 
-                    Console.Write("\nInvalid input. Please enter a number between 1 and 4: ");
-                }
+                //Read User Input
+                menuChoice = GetInput(menuChoice);
 
-
-                if(menuChoice == 1)
+                switch (menuChoice)
                 {
-                    Console.Write("Enter the name of the task: ");
-                    string taskName = Console.ReadLine();
-                    AddTask(tasks, taskName);
-                }
-
-                if (menuChoice == 2) 
-                {
-                    if (tasks.Count == 0)
+    
+                    case 1:
                     {
-                        Console.WriteLine("The list is empty!");
-                        continue;
+                        Console.Write("Enter the name of the task: ");
+                        string taskName = Console.ReadLine();
+                        AddTask(tasks, taskName);
                     }
-                    ShowTask(tasks);
-                }
 
-                if(menuChoice == 3)
-                {
-                    if (tasks.Count == 0)
-                    { 
-                        Console.WriteLine("No tasks to remove! The list is empty.");
                         continue;
-                    }
-                    Console.Write("Enter the index of task you want to delete: ");
 
-                    int taskIndex;
-                    while (!int.TryParse(Console.ReadLine(), out taskIndex))
+
+                    case 2:
                     {
-                        Console.Write("Invalid input! Please enter a number again: ");
+                        if (tasks.Count == 0)
+                        {
+                            Console.WriteLine("The list is empty!");
+                            continue;
+                        }
+                        ShowTask(tasks);
                     }
-                    
-                    RemoveTask(tasks, taskIndex);
+                        continue;
+
+                    case 3:
+                    {
+                        if (tasks.Count == 0)
+                        {
+                            Console.WriteLine("No tasks to remove! The list is empty.");
+                            continue;
+                        }
+                        Console.Write("Enter the task number you want to delete: ");
+
+                        int taskIndex;
+                        while (!int.TryParse(Console.ReadLine(), out taskIndex))
+                        {
+                            Console.Write("Invalid input! Please enter a number again: ");
+                        }
+
+                        RemoveTask(tasks, taskIndex);
+                    }
+                        continue;
+
+                    case 4:
+                        Console.WriteLine("Exiting the app. Goodbye!");
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice");
+                        break;
+
                 }
 
                 Console.WriteLine();
@@ -68,6 +83,17 @@ namespace Task_3
 
         }
 
+        static int GetInput(int menuChoice)
+        {
+            while ((!int.TryParse(Console.ReadLine(), out menuChoice)) || (menuChoice < 1 || menuChoice > 4))
+            {
+                Console.Write("\nInvalid input. Please enter a number between 1 and 4: ");
+            }
+
+            return menuChoice;
+
+
+        }
         static void AddTask(List<Task> _tasks, string taskName)
         {
             _tasks.Add(new Task { name = taskName });
@@ -76,7 +102,7 @@ namespace Task_3
 
         static void ShowTask(List<Task> tasks)
         {
-            Console.WriteLine("**** Tasks in the list ****");
+            Console.WriteLine("\n**** Tasks in the list ****");
             for (int i = 0; i < tasks.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {tasks[i].name}");
@@ -100,6 +126,7 @@ namespace Task_3
     }
 
 }
+
 
 
 /*
