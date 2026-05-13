@@ -33,9 +33,7 @@ namespace Task_3
                         string taskName = Console.ReadLine();
                         AddTask(tasks, taskName);
                     }
-
                         continue;
-
 
                     case 2:
                     {
@@ -74,13 +72,11 @@ namespace Task_3
                     default:
                         Console.WriteLine("Invalid choice");
                         break;
-
                 }
 
                 Console.WriteLine();
 
             }
-
         }
 
         static int GetInput(int menuChoice)
