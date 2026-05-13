@@ -22,11 +22,10 @@ namespace Task_3
                                   "4. Exit\n");
 
                 //Read User Input
-                menuChoice = GetInput(menuChoice);
+                menuChoice = GetInput();
 
                 switch (menuChoice)
-                {
-    
+                {    
                     case 1:
                     {
                         Console.Write("Enter the name of the task: ");
@@ -73,23 +72,21 @@ namespace Task_3
                         Console.WriteLine("Invalid choice");
                         break;
                 }
-
+                
                 Console.WriteLine();
-
             }
         }
 
-        static int GetInput(int menuChoice)
+        static int GetInput()
         {
-            while ((!int.TryParse(Console.ReadLine(), out menuChoice)) || (menuChoice < 1 || menuChoice > 4))
+            int input;
+            while ((!int.TryParse(Console.ReadLine(), out input)) || (input < 1 || input > 4))
             {
                 Console.Write("\nInvalid input. Please enter a number between 1 and 4: ");
             }
-
-            return menuChoice;
-
-
+            return input;
         }
+        
         static void AddTask(List<Task> _tasks, string taskName)
         {
             _tasks.Add(new Task { name = taskName });
@@ -117,10 +114,9 @@ namespace Task_3
             {
                 Console.WriteLine("Invalid input! No task removed.");
             }
-
         }
     }
-
+    
 }
 
 
